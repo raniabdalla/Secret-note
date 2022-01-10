@@ -1,2 +1,2 @@
 # secret-note
-Secret Note Application.
+Secret Notes Application.
