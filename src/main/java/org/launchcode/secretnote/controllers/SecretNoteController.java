@@ -24,6 +24,9 @@ public class SecretNoteController {
      *
      */
 
+//    @RequestMapping("sample-note")
+//    public
+
 //    @RequestMapping("dashboard")
 //    public String index(Model model)
 //    {
