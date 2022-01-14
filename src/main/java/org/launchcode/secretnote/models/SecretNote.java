@@ -8,6 +8,8 @@ public class SecretNote {
 
     private Folder folder;
 
+    private String description;
+
     private UUID id = UUID.randomUUID();
 
     public SecretNote(String name, Folder folder) {
