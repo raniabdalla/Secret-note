@@ -3,19 +3,10 @@ package org.launchcode.secretnote.models;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 @Entity
-public class User {
-
-    @Id
-    private UUID id = UUID.randomUUID();
-
-    public UUID getId() {
-        return id;
-    }
+public class User extends AbstractEntity{
 
     @NotNull
     private String username;
