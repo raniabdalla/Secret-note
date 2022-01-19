@@ -19,5 +19,17 @@ public class SecretNoteController {
         return "index";
     }
 
+    /*
+     * Display all stored notes
+     *
+     */
 
+
+
+//    @RequestMapping("dashboard")
+//    public String index(Model model)
+//    {
+//        model.addAttribute("title", "Welcome back!");
+//        return "dashboard";
+//    }
 }

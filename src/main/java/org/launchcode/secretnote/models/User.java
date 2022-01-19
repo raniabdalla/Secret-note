@@ -1,11 +1,34 @@
 package org.launchcode.secretnote.models;
 
-import java.util.UUID;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class User {
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
+@Entity
+public class User extends AbstractEntity{
+
+    @NotNull
     private String username;
 
-    private UUID id = UUID.randomUUID();
+    @NotNull
+    private String hPassword;
+
+    public User() {}
+
+    public User(String username, String password) {
+        this.username = username;
+        this.hPassword = encoder.encode(password);
+    }
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isMatching(String password){
+        return encoder.matches(password, hPassword);
+    }
 
 }
