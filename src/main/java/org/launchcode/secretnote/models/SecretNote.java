@@ -1,9 +1,11 @@
 package org.launchcode.secretnote.models;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
+@Entity
 public class SecretNote {
 
     @NotBlank(message = "Please enter a note name")
