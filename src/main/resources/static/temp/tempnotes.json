@@ -1,8 +1,8 @@
 {
-  "notes": [
+  "notes" : [
     {
       "id": 10001,
-      "title": "Bob's Phone Number",
+      "title": "Bobs Phone Number",
       "date_create": "2022-01-10",
       "date_edit": "2022-01-10",
       "content": "212-555-3030",
@@ -18,7 +18,7 @@
     },
     {
       "id": 10003,
-      "title": "Alice's D&D character",
+      "title": "Alices D&D character",
       "date_create": "2022-01-03",
       "date_edit": "2022-01-07",
       "content": "Warlock Paladin<br>diety and patron the same - Corvea queen of ravens<br>|STR|12|<br>|DEX|9|<br>|CON|12|<br>|INT|10|<br>|WIS|13|<br>|CHA|16|",
