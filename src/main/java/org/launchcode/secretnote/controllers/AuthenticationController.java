@@ -1,6 +1,7 @@
 package org.launchcode.secretnote.controllers;
 
 import org.launchcode.secretnote.data.UserRepository;
+import org.launchcode.secretnote.models.LoginFormDTO;
 import org.launchcode.secretnote.models.RegisterFormDTO;
 
 import org.launchcode.secretnote.models.User;
@@ -11,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -44,7 +46,9 @@ public class AuthenticationController {
     private static void setUserInSession(HttpSession session, User user) {
         session.setAttribute(userSessionKey, user.getId());
     }
+
     @GetMapping("/register")
+    //@RequestMapping(value = "/login", params = "pills-home")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register");
@@ -52,6 +56,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
+    //@RequestMapping(value = "/login", params = "pills-home")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model) {
@@ -66,7 +71,7 @@ public class AuthenticationController {
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
             model.addAttribute("title", "Register");
-            return "register";
+            return "login";
         }
 
         String password = registerFormDTO.getPassword();
@@ -74,7 +79,7 @@ public class AuthenticationController {
         if (!password.equals(verifyPassword)) {
             errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
             model.addAttribute("title", "Register");
-            return "register";
+            return "login";
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
@@ -83,4 +88,49 @@ public class AuthenticationController {
 
         return "redirect:";
     }
+
+    @GetMapping("/login")
+    public String displayLoginForm(Model model){
+        model.addAttribute(new LoginFormDTO());
+        model.addAttribute("title", "Log In");
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String processLoginFrom(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
+                                   Errors errors, HttpServletRequest request,
+                                   Model model){
+
+        if (errors.hasErrors()){
+            model.addAttribute("title", "Log In");
+            return "login";
+        }
+
+        User user = userRepository.findByUsername(loginFormDTO.getUsername());
+
+        if (user== null){
+            errors.rejectValue("username", "user.invalid", "The given username does not exist");
+            model.addAttribute("title", "Log In");
+            return "login";
+        }
+
+        String password = loginFormDTO.getPassword();
+
+        if (!user.isMatching(password)){
+            errors.rejectValue("password", "password.invalid", "Invalid Password");
+            model.addAttribute("title", "Log In");
+            return "login";
+        }
+
+        setUserInSession(request.getSession(), user);
+
+        return "redirect:";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "redirect:/login";
+    }
+
+
 }
