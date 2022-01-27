@@ -1,5 +1,6 @@
 package org.launchcode.secretnote.models;
 
+import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ public class Folder {
     @NotBlank(message = "Please enter a folder name")
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
+
 
     public Folder(String name) {
         this.name = name;
