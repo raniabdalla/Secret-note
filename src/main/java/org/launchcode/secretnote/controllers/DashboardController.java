@@ -9,6 +9,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("dashboard")
@@ -58,15 +60,31 @@ public class DashboardController {
 
     /** Processes deletion of notes, if ID is NOT NULL, deletes the note and returns user to dashboard - CR */
     @PostMapping("delete")
-    public String processDeleteNoteForm(@RequestParam(required = false) int[] noteIds) {
+    public String processDeleteNoteForm(@RequestParam(required = false) UUID[] noteIds) {
 
         if (noteIds !=null) {
-            for (int id : noteIds) {
+            for (UUID id : noteIds) {
                 noteRepository.deleteById(id);
             }
         }
         return "dashboard";
 
+    }
+
+    /** Displays specific note details upon clicking on a note displayed on user's dashboard - ZK */
+    @GetMapping("details")
+    public String displayNoteDetails(@RequestParam UUID id, Model model) {
+
+        Optional<SecretNote> result = noteRepository.findById(id);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Note ID: " + id);
+        } else {
+            SecretNote secretNote = result.get();
+            model.addAttribute("title", secretNote.getName() + " Details");
+            model.addAttribute("secretNote", secretNote);
+        }
+        return "notes/details";
     }
 
 }
