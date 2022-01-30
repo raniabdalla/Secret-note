@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -44,6 +44,7 @@
                       </span>
                 </div>
                 <input type="password" class="form-control" th:field="${registerFormDTO.verifyPassword}" placeholder="verify password">
+                <p class="error" th:errors="${registerFormDTO.verifyPassword}"></p>
             </div>
             <button type="submit" class="btn btn-info btn-block">Register </button>
         </form>
