@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("dashboard")
+@RequestMapping("notes")
 public class DashboardController {
 
     @Autowired
