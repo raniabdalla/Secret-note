@@ -48,6 +48,14 @@ public class SecretNote {
         this.folder = folder;
     } */
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public UUID getId() { return id;}
 
     @Override
