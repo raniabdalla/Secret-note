@@ -47,7 +47,7 @@ public class DashboardController {
         }
 
         noteRepository.save(newSecretNote);
-        return "notes/create";
+        return "dashboard";
     }
 
     /** Displays the form page for Deleting a note, this can be tweaked later to be more user friendly - CR */
