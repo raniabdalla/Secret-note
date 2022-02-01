@@ -62,28 +62,3 @@ const notesRaw = `{
                     }
                   ]
                 }`;
-
-function drawNote(note) {
-        console.log(note.id);
-        let noteDiv = document.createElement("div");
-        noteDiv.class = "testingborder";
-        noteDiv.style.backgroundColor = note.color;
-        noteDiv.style.left = note.xpos;
-        noteDiv.style.top = note.ypos;
-        noteDiv.style.minwidth = note.xsize;
-        noteDiv.style.minheight = note.ysize;
-        dashboardContainer.appendChild(noteDiv);
-}
-
-window.addEventListener("load", function() {
-
-    const notesObj = JSON.parse(notesRaw);
-
-    const htmlBody = document.getElementsByTagName("body")[0];
-    const dashboardContainer = document.getElementById("dashboardContainer");
-
-    for (let note of notesObj.notes) {
-        drawNote(note);
-    }
-
-});

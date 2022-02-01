@@ -3,6 +3,8 @@
 
 <head th:fragment="head">
 
+    <link rel="stylesheet" href="css/secretnote.css">
+
     <!-- jQuery for Bootstrap -->
     <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -12,8 +14,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+    <script type="module" th:src="@{/js/testingNotes.js}"></script>
     <script type="module" th:src="@{/js/dashboard.js}"></script>
-    <script type="application/json" th:src="@{/temp/tempnotes.json}"></script>
+
 
     <meta charset="utf-8">
     <title th:text="${title}">Secret Note page title</title>
@@ -26,7 +29,7 @@
         <div class="navbar-header">
             <a th:href="@{/}" class="navbar-brand">Secret Note</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/dashboard}">Dashboard</a></li>
                 <li><a th:href="@{/settings}">Settings</a></li>
