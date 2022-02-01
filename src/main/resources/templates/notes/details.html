@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+<h1 th:text="${'Note: ' + secretNote.id}">Default Title</h1>
+
+<!--<nav th:replace="fragments :: page-header"></nav>-->
+
+<div class="row center-block">
+    <p th:text="${'Name: ' + secretNote.name}"></p>
+    <p th:text="${'Contents: ' + secretNote.content}"></p>
+</div>
+
+
+</body>
+</html>
