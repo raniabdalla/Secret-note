@@ -62,3 +62,5 @@ const notesRaw = `{
                     }
                   ]
                 }`;
+
+export default notesRaw;
