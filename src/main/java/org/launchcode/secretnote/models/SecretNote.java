@@ -21,9 +21,9 @@ public class SecretNote {
     private String content;
 
     @Id
-    private UUID id = UUID.randomUUID();
+    private String id = UUID.randomUUID().toString().replace("-", "");
 
-    public SecretNote(String name, String content, UUID id) {
+    public SecretNote(String name, String content, String id) {
         this.name = name;
         this.content = content;
         this.id = id;
@@ -56,7 +56,7 @@ public class SecretNote {
         this.content = content;
     }
 
-    public UUID getId() { return id;}
+    public String getId() { return id;}
 
     @Override
     public String toString() {
