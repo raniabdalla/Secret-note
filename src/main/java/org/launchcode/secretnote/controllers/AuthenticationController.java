@@ -48,7 +48,6 @@ public class AuthenticationController {
     }
 
     @GetMapping("/register")
-    //@RequestMapping(value = "/login", params = "pills-home")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register");
@@ -56,7 +55,6 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    //@RequestMapping(value = "/login", params = "pills-home")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model) {
@@ -131,6 +129,14 @@ public class AuthenticationController {
         request.getSession().invalidate();
         return "redirect:/login";
     }
+
+    @GetMapping("/account")
+    public String displayEditForm(Model model){
+        model.addAttribute(new LoginFormDTO());
+        model.addAttribute("title", "Edit Account");
+        return "account";
+    }
+
 
 
 }
