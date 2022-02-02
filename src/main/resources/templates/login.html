@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/dc6715bc54.js"></script>
 </head>
 <body>
+<div class="row justify-content-center">
+    <div class="col col-md-6 text-center">
+        <form method="Post">
+            <h1 class="display-4 py-4">Sign in</h1>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="fa fa-user text-info"></i>
+                      </span>
+                </div>
+                <input type="text" class="form-control" th:field="${loginFormDTO.username}" placeholder="username">
+                <p class="error" th:errors="${loginFormDTO.username}"></p>
+            </div>
+            <div class="input-group my-3">
+                <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="fa fa-lock text-info"></i>
+                      </span>
+                </div>
+                <input type="password" class="form-control" th:field="${loginFormDTO.password}" placeholder="password">
+                <p class="error" th:errors="${loginFormDTO.password}"></p>
+            </div>
 
+            <button type="submit" class="btn btn-info btn-block"> Sign in </button>
+        </form>
+        <a href="/register" class="btn btn-secondary btn-block my-3"> Create account</a>
+    </div>
+</div>
 </body>
 </html>

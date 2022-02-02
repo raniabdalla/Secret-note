@@ -27,13 +27,12 @@
 <div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a th:href="@{/}" class="navbar-brand">Secret Note</a>
+            <a th:href="@{/}" class="navbar-brand">Secret Notes</a>
         </div>
         <div class="navbar">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/dashboard}">Dashboard</a></li>
-                <li><a th:href="@{/settings}">Settings</a></li>
-                <li><a th:href="@{/logout}">Logout</a></li>
+                <li><a th:href="@{/notes/create}">Create</a></li>
             </ul>
         </div>
     </div>

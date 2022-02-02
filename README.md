@@ -1,2 +1,2 @@
-# angela-group
-This is Angela's test.
+# secret-note
+Secret Notes Application.
