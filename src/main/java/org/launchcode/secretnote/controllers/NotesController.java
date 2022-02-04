@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("notes")
-public class DashboardController {
+public class NotesController {
 
     @Autowired
     private NoteRepository noteRepository;
@@ -30,7 +30,8 @@ public class DashboardController {
     }
 
 
-    /** Displays the form/note for new note creation - CR */
+    /** Displays the form/note for new note creation - CR
+     * This is located at "localhost:8080/notes/create when you run the application - CR */
     @GetMapping("create")
     public String renderCreateNoteForm(Model model) {
         model.addAttribute("title", "New Note");

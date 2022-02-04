@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class SecretNoteController {
+public class LandingPageController {
     /**
      * Greet visitors on the main page.
      *
@@ -19,17 +19,4 @@ public class SecretNoteController {
         return "index";
     }
 
-    /*
-     * Display all stored notes
-     *
-     */
-
-
-
-//    @RequestMapping("dashboard")
-//    public String index(Model model)
-//    {
-//        model.addAttribute("title", "Welcome back!");
-//        return "dashboard";
-//    }
 }
