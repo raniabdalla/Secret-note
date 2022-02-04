@@ -61,10 +61,10 @@ public class NotesController {
 
     /** Processes deletion of notes, if ID is NOT NULL, deletes the note and returns user to dashboard - CR */
     @PostMapping("delete")
-    public String processDeleteNoteForm(@RequestParam(required = false) String[] noteIds) {
+    public String processDeleteNoteForm(@RequestParam(required = false) int[] noteIds) {
 
         if (noteIds !=null) {
-            for (String id : noteIds) {
+            for (int id : noteIds) {
                 noteRepository.deleteById(id);
             }
         }
@@ -73,8 +73,8 @@ public class NotesController {
     }
 
     /** Displays specific note details upon clicking on a note displayed on user's dashboard - ZK */
-    @GetMapping("details")
-    public String displayNoteDetails(Model model, @RequestParam String id) {
+    @GetMapping("details/{id}")
+    public String displayNoteDetails(Model model, @PathVariable int id) {
 
         Optional<SecretNote> result = noteRepository.findById(id);
 
