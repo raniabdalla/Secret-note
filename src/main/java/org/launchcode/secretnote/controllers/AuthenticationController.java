@@ -130,13 +130,4 @@ public class AuthenticationController {
         return "redirect:/login";
     }
 
-    @GetMapping("/account")
-    public String displayEditForm(Model model){
-        model.addAttribute(new LoginFormDTO());
-        model.addAttribute("title", "Edit Account");
-        return "account";
-    }
-
-
-
 }
