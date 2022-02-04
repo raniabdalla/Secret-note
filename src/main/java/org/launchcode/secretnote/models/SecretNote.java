@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class SecretNote {
@@ -21,12 +22,12 @@ public class SecretNote {
     private String content;
 
     @Id
-    private String id = UUID.randomUUID().toString().replace("-", "");
+    private int id;
 
-    public SecretNote(String name, String content, String id) {
+    public SecretNote(String name, String content, int id) {
         this.name = name;
         this.content = content;
-        this.id = id;
+        this.id = id++;
     }
 
     public SecretNote() {
@@ -56,7 +57,7 @@ public class SecretNote {
         this.content = content;
     }
 
-    public String getId() { return id;}
+    public int getId() { return id;}
 
     @Override
     public String toString() {
