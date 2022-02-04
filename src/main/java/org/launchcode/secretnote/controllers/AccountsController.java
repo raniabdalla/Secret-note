@@ -16,5 +16,4 @@ public class AccountsController {
         model.addAttribute("title", "Edit Account");
         return "accounts/index";
     }
-
 }
