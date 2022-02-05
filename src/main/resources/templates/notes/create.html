@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-
 <head th:replace="fragments :: head">
-
 <body>
-    <div class="container justify-content-center pt-5" style="width: 67%;">
+    <nav th:replace="fragments :: navbar"></nav>
+    <div class="container pt-5 body-content">
         <form method="post">
             <div class="form-group row">
-                <label for="notename" class="col-12">Note Name
+                <label for="notename" class="col-md-12">Note Name
                     <input th:field="${secretNote.name}" class="form-control" id="notename" style="width:100%;">
                 </label>
                 <p class="error" th:errors="${secretNote.name}"></p>
             </div>
             <div class="form-group row">
-                <label for="notecontent" class="col-12">Note Content
+                <label for="notecontent" class="col-md-12">Note Content
                     <textarea th:field="${secretNote.content}" class="form-control" rows="8" id="notecontent"></textarea>
                 </label>
                 <p class="error" th:errors="${secretNote.content}"></p>
             </div>
             <div class="form-group row">
-                <input type="submit" value="Create Note" class="btn btn-info col-12">
+                <div class="col-md-3"></div>
+                <input type="submit" value="Create Note" class="btn btn-info col-md-6">
+                <div class="col-md-3"></div>
             </div>
         </form>
     </div>

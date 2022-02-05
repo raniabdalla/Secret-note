@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/accounts.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://use.fontawesome.com/dc6715bc54.js"></script>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
-<div class=" mt-5 row justify-content-center ">
-    <div id="border" class="col col-md-6 text-center display-4 py-4">
-        <h1 class="display-4 py-3"> Edit Account </h1>
-        <img src="img/edit-profile-picture.jpg" class="img-responsive my-3" ><br>
-        <button type="submit" class="btn btn-info my-3 "> Change Username</button><br>
-        <button type="submit" class="btn btn-info my-3">  Reset Password </button><br>
-        <button type="submit" class="btn btn-info"> Delete Account </button>
+    <nav th:replace="fragments :: navbar"></nav>
+    <div class="container" style="width: 33%;">
+        <div class="row justify-content-center">
+            <img src="img/SecretNoteEditAccount.svg" style="width:75%;">
+        </div>
+<!--        <div class="row">-->
+<!--            <form method="post" class="col-12 my-5 px-0">-->
+<!--                <div class="input-group">-->
+<!--                    <div class="input-group-prepend">-->
+<!--                          <span class="input-group-text">-->
+<!--                              <i class="fa fa-user text-info"></i>-->
+<!--                          </span>-->
+<!--                    </div>-->
+<!--                    <input type="text" class="form-control" th:field="${loginFormDTO.username}" placeholder="username">-->
+<!--                    <p class="error" th:errors="${loginFormDTO.username}"></p>-->
+<!--                </div>-->
+<!--                <div class="input-group my-3">-->
+<!--                    <div class="input-group-prepend">-->
+<!--                          <span class="input-group-text">-->
+<!--                              <i class="fa fa-lock text-info"></i>-->
+<!--                          </span>-->
+<!--                    </div>-->
+<!--                    <input type="password" class="form-control" th:field="${loginFormDTO.password}" placeholder="password">-->
+<!--                    <p class="error" th:errors="${loginFormDTO.password}"></p>-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-info btn-block"> Sign in </button>-->
+<!--            </form>-->
+<!--        </div>-->
+        <div class="row">
+            <button type="submit" class="btn btn-info my-3 col-12">Change Username</button><br>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-info my-3 col-12">Reset Password</button><br>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-info my-3 col-12">Delete Account</button>
+        </div>
     </div>
 </div>
 </body>

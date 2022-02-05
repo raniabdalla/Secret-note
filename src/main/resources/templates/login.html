@@ -2,41 +2,34 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 <body>
-<div class="container justify-content-center text-center" style="width: 33%;">
-    <div class="row">
-        <form method="post" class="col-12 my-5 px-0">
-            <img src="img/SecretNoteSignin.svg" style="width:75%;">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                      <span class="input-group-text">
-                          <i class="fa fa-user text-info"></i>
-                      </span>
+    <div class="container justify-content-center text-center" style="width: 33%;">
+        <div class="row">
+            <form method="post" class="col-12 my-5 px-0">
+                <img src="img/SecretNoteSignin.svg" style="width:75%;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                          <span class="input-group-text">
+                              <i class="fa fa-user text-info"></i>
+                          </span>
+                    </div>
+                    <input type="text" class="form-control" th:field="${loginFormDTO.username}" placeholder="username">
+                    <p class="error" th:errors="${loginFormDTO.username}"></p>
                 </div>
-                <input type="text" class="form-control" th:field="${loginFormDTO.username}" placeholder="username">
-                <p class="error" th:errors="${loginFormDTO.username}"></p>
-            </div>
-            <div class="input-group my-3">
-                <div class="input-group-prepend">
-                      <span class="input-group-text">
-                          <i class="fa fa-lock text-info"></i>
-                      </span>
+                <div class="input-group my-3">
+                    <div class="input-group-prepend">
+                          <span class="input-group-text">
+                              <i class="fa fa-lock text-info"></i>
+                          </span>
+                    </div>
+                    <input type="password" class="form-control" th:field="${loginFormDTO.password}" placeholder="password">
+                    <p class="error" th:errors="${loginFormDTO.password}"></p>
                 </div>
-                <input type="password" class="form-control" th:field="${loginFormDTO.password}" placeholder="password">
-                <p class="error" th:errors="${loginFormDTO.password}"></p>
-            </div>
-            <button type="submit" class="btn btn-info btn-block"> Sign in </button>
-        </form>
+                <button type="submit" class="btn btn-info btn-block">Sign in</button>
+            </form>
+        </div>
+        <div class="row">
+            <a href="/register" class="btn btn-primary btn-block col-12">Create account</a>
+        </div>
     </div>
-    <div class="row">
-        <a href="/register" class="btn btn-info btn-block col-12 my-3" style="background-color:#5dbdc6"> Create account</a>
-    </div>
-    <div class="row">
-        <a href="/account" class="btn btn-info btn-block col-12 my-3" style="background-color:#87c4cc"> Edit account</a>
-    </div>
-    <div class="row">
-        <a href="/logout" class="btn btn-secondary btn-block col-12 my-3" > Log Out</a>
-    </div>
-</div>
-</div>
 </body>
 </html>
