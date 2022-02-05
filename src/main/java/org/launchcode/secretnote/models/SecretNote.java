@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Entity
 public class SecretNote extends AbstractEntity {
 
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "notes_id")
     private User user;
 
     @NotBlank(message = "Please enter a note name")
@@ -24,15 +24,11 @@ public class SecretNote extends AbstractEntity {
     @Size(min = 1, max = 500, message = "Note must be between 1 and 500 characters")
     private String content;
 
-    @Id
-    @GeneratedValue
-    private int id;
 
-    public SecretNote(String name, String content, int id, User aUser) {
+    public SecretNote(String name, String content, User aUser) {
         super();
         this.name = name;
         this.content = content;
-        this.id =id;
         this.user = aUser;
     }
 
@@ -71,8 +67,6 @@ public class SecretNote extends AbstractEntity {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public int getId() { return id;}
 
     @Override
     public String toString() {
