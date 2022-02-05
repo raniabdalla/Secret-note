@@ -4,8 +4,8 @@
 <body>
 <div class="container justify-content-center text-center" style="width: 33%;">
     <div class="row">
-        <form method="Post" >
-            <h1 class="display-4 py-4">Register</h1>
+        <form method="post" class="col-12 my-5 px-0">
+            <img src="img/SecretNoteNewAccount.svg" style="width:75%;">
             <div class="input-group">
                 <div class="input-group-prepend">
                       <span class="input-group-text">
@@ -40,7 +40,7 @@
                 <input type="password" class="form-control" th:field="${registerFormDTO.verifyPassword}" placeholder="verify password">
                 <p class="error" th:errors="${registerFormDTO.verifyPassword}"></p>
             </div>
-            <button type="submit" class="btn btn-info btn-block">Register </button>
+            <button type="submit" class="btn btn-info btn-block">Register</button>
         </form>
     </div>
 </div>
