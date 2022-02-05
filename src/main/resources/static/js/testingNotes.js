@@ -7,8 +7,8 @@ const notesRaw = `{
                       "date_edit": "2022-01-10",
                       "content": "212-555-3030",
                       "color": "#ffe599",
-                      "xsize": "200px",
-                      "ysize": "180px",
+                      "xsize": "350px",
+                      "ysize": "300px",
                       "xpos": "20px",
                       "ypos": "20px"
                     },
@@ -19,8 +19,8 @@ const notesRaw = `{
                       "date_edit": "2022-01-10",
                       "content": "- shampoo<br>- painkillers<br>- parmesan cheese<br>- paper towels",
                       "color": "#d5a6bd",
-                      "xsize": "200px",
-                      "ysize": "180px",
+                      "xsize": "350px",
+                      "ysize": "300px",
                       "xpos": "40px",
                       "ypos": "40px"
                     },
@@ -31,8 +31,8 @@ const notesRaw = `{
                       "date_edit": "2022-01-07",
                       "content": "Warlock Paladin<br>diety and patron the same - Corvea queen of ravens<br>|STR|12|<br>|DEX|9|<br>|CON|12|<br>|INT|10|<br>|WIS|13|<br>|CHA|16|",
                       "color": "#f9cb9c",
-                      "xsize": "200px",
-                      "ysize": "180px",
+                      "xsize": "350px",
+                      "ysize": "300px",
                       "xpos": "60px",
                       "ypos": "60px"
                     },
@@ -43,8 +43,8 @@ const notesRaw = `{
                       "date_edit": "2022-01-08",
                       "content": "store@<br>!nV3nt0ry<br><br>team@<br>1NV3ntory<br><br>company@<br>!nV3nt0ry1",
                       "color": "#b4a7d6",
-                      "xsize": "200px",
-                      "ysize": "180px",
+                      "xsize": "350px",
+                      "ysize": "300px",
                       "xpos": "80px",
                       "ypos": "80px"
                     },
@@ -55,8 +55,8 @@ const notesRaw = `{
                       "date_edit": "2022-01-02",
                       "content": "wand of flaming sphere<br>three daggers<br>six vials of black powder<br>hat of disguise",
                       "color": "#ea9999",
-                      "xsize": "200px",
-                      "ysize": "180px",
+                      "xsize": "350px",
+                      "ysize": "300px",
                       "xpos": "100px",
                       "ypos": "100px"
                     }

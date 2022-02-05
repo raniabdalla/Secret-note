@@ -2,22 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 <body>
-<div class="container">
-    <div class="page-header"><!-- logo row -->
-        <div class="row center-block">
-            <div class="col-lg-4 col-lg-offset-4">
-                <img src="img/SecretNoteLogo.svg" class="img-responsive">
-            </div>
-        </div>
+<div class="container justify-content-center" style="width: 33%">
+    <div class="row mt-5">
+        <img src="img/SecretNoteLogo.svg">
     </div>
-    <div class="row center-block"><!-- intro text row -->
-        <div class="col-lg-6 col-lg-offset-3">
-            <h3 class="text-center">Secret Note allows you to keep personal notes, accessible anywhere, stored securely.</h3>
-            <p>Log in to view your notes, make new notes and edit old ones, with the assurance that only you can see them.</p>
-            <a href="/login"><button type="button" class="btn btn-primary center-block">Log in</button></a>
-        </div>
+    <div class="row">
+        <h3>Secret Note allows you to keep personal notes, accessible anywhere, stored securely.</h3>
     </div>
-
+    <div class="row">
+        <p>Log in to view your notes, make new notes and edit old ones, with the assurance that only you can see them.</p>
+    </div>
+    <div class="row">
+        <a href="/login" class="btn btn-info btn-block">Log in</a>
+    </div>
 </div>
 </body>
 </html>
