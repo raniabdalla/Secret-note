@@ -1,14 +1,17 @@
 package org.launchcode.secretnote.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
-public class SecretNote {
+public class SecretNote extends AbstractEntity {
+
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @NotBlank(message = "Please enter a note name")
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
@@ -22,15 +25,19 @@ public class SecretNote {
     private String content;
 
     @Id
+    @GeneratedValue
     private int id;
 
-    public SecretNote(String name, String content, int id) {
+    public SecretNote(String name, String content, int id, User aUser) {
+        super();
         this.name = name;
         this.content = content;
-        this.id = id++;
+        this.id =id;
+        this.user = aUser;
     }
 
     public SecretNote() {
+
     }
 
     public String getName() {
@@ -55,6 +62,14 @@ public class SecretNote {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() { return id;}
