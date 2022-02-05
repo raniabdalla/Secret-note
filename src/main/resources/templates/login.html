@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://use.fontawesome.com/dc6715bc54.js"></script>
-</head>
+<head th:replace="fragments :: head">
 <body>
-<div class="row justify-content-center">
-    <div class="col col-md-6 text-center">
-        <form method="Post">
+<div class="container justify-content-center text-center" style="width: 33%;">
+    <div class="row">
+        <form method="Post" class="col-12 my-5 px-0">
             <h1 class="display-4 py-5">Sign in</h1>
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -30,13 +24,19 @@
                 <input type="password" class="form-control" th:field="${loginFormDTO.password}" placeholder="password">
                 <p class="error" th:errors="${loginFormDTO.password}"></p>
             </div>
-
             <button type="submit" class="btn btn-info btn-block"> Sign in </button>
         </form>
-        <a href="/register" class="btn btn-info btn-block my-3" style="background-color:#5dbdc6"> Create account</a>
-        <a href="/account" class="btn btn-info btn-block my-3" style="background-color:#87c4cc"> Edit account</a>
-        <a href="/logout" class="btn btn-secondary btn-block my-3" > Log Out</a>
     </div>
+    <div class="row">
+        <a href="/register" class="btn btn-info btn-block col-12 my-3" style="background-color:#5dbdc6"> Create account</a>
+    </div>
+    <div class="row">
+        <a href="/account" class="btn btn-info btn-block col-12 my-3" style="background-color:#87c4cc"> Edit account</a>
+    </div>
+    <div class="row">
+        <a href="/logout" class="btn btn-secondary btn-block col-12 my-3" > Log Out</a>
+    </div>
+</div>
 </div>
 </body>
 </html>
