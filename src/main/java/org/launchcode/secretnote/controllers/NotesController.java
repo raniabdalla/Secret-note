@@ -1,7 +1,9 @@
 package org.launchcode.secretnote.controllers;
 
 import org.launchcode.secretnote.data.NoteRepository;
+import org.launchcode.secretnote.data.UserRepository;
 import org.launchcode.secretnote.models.SecretNote;
+import org.launchcode.secretnote.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +21,14 @@ public class NotesController {
     @Autowired
     private NoteRepository noteRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     /**This controller is intended to be what the user sees when they log in. It will store all of their notes and allow
     them to perform CRUD actions on their notes - Caleb Roman(CR) */
 
     /**Displays the notes on the Dashboard Page - CR */
-    @GetMapping public String displayNotes(Model model) {
+    @GetMapping public String displayNotes(Model model, @RequestParam int userId) {
         model.addAttribute("title", "All Notes");
         model.addAttribute("notes", noteRepository.findAll());
         return "notes/index";
@@ -39,16 +44,22 @@ public class NotesController {
         return "notes/create";
     }
 
-    /** Makes sure the new note is valid and does not create errors, then saves - CR */
+    /** Makes sure the new note is valid and does not create errors, then saves. Takes userId as a path parameter.
+     * Once you have created a login, find the id on the user table and enter localhost:8080/notes/create?userId=number found on user table - CR */
     @PostMapping("create")
-    public String processCreateNoteForm(@ModelAttribute @Valid SecretNote newSecretNote, Errors errors, Model model) {
+    public String processCreateNoteForm(@ModelAttribute @Valid SecretNote newSecretNote, Errors errors, Model model,
+                                        @RequestParam int userId) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "New Note");
             return "notes/create";
         }
 
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            newSecretNote.setUser(user.get());
+        }
         noteRepository.save(newSecretNote);
-        return "dashboard";
+        return "notes/index";
     }
 
     /** Displays the form page for Deleting a note, this can be tweaked later to be more user friendly - CR */
@@ -68,7 +79,7 @@ public class NotesController {
                 noteRepository.deleteById(id);
             }
         }
-        return "dashboard";
+        return "notes/index";
 
     }
 
