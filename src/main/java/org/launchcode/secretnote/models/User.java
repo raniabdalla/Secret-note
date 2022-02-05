@@ -13,6 +13,7 @@ import java.util.List;
 public class User extends AbstractEntity{
 
     @OneToMany
+    @JoinColumn
     private List<SecretNote> notes = new ArrayList<>();
 
     @NotNull

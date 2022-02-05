@@ -28,7 +28,8 @@ public class NotesController {
     them to perform CRUD actions on their notes - Caleb Roman(CR) */
 
     /**Displays the notes on the Dashboard Page - CR */
-    @GetMapping public String displayNotes(Model model, @RequestParam int userId) {
+    @GetMapping
+    public String displayNotes(Model model) {
         model.addAttribute("title", "All Notes");
         model.addAttribute("notes", noteRepository.findAll());
         return "notes/index";
@@ -88,6 +89,7 @@ public class NotesController {
     public String displayNoteDetails(Model model, @PathVariable int id) {
 
         Optional<SecretNote> result = noteRepository.findById(id);
+
 
         if (result.isEmpty()) {
             model.addAttribute("title", "Invalid Note ID: " + id);
