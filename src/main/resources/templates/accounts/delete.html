@@ -5,7 +5,6 @@
 <nav th:replace="fragments :: navbar"></nav>
 <div class="container" style="width: 33%;">
     <form method="post">
-
         <th:block th:each="user : ${users}">
             <div class="form-group">
                 <label>
@@ -14,7 +13,6 @@
                 </label>
             </div>
         </th:block>
-
         <input type="submit" value="Delete" class="btn btn-danger">
     </form>
 </div>
