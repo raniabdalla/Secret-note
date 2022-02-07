@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
+<head th:insert="fragments :: head">
 <body>
+    <script th:inline="javascript">const notes = /*[[${notes}]]*/;</script>
+    <script type="module" th:src="@{~/js/dashboard.js}"></script>
     <nav th:replace="fragments :: navbar"></nav>
     <div class="container body-content">
         <div id="dashboardContainer"></div>
