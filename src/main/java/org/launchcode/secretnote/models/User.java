@@ -35,6 +35,9 @@ public class User extends AbstractEntity{
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public boolean isMatching(String password){
         return encoder.matches(password, hPassword);
     }
