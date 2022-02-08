@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,42 +27,58 @@ public class NotesController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    AuthenticationController authenticationController;
+
     /**This controller is intended to be what the user sees when they log in. It will store all of their notes and allow
     them to perform CRUD actions on their notes - Caleb Roman(CR) */
 
     /**Displays the notes on the Dashboard Page - CR */
+    /** BWG 2/7 - added code to pull userID from the session and add it to the model **/
     @GetMapping
-    public String displayNotes(Model model) {
+    public String displayNotes(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        User user = authenticationController.getUserFromSession(session);
         model.addAttribute("title", "All Notes");
         model.addAttribute("notes", noteRepository.findAll());
+        model.addAttribute("userID", user.getId());
         return "notes/index";
     }
 
 
     /** Displays the form/note for new note creation - CR
      * This is located at "localhost:8080/notes/create when you run the application - CR */
+    /** BWG 2/7 - added code to pull userID from the session and add it to the model **/
     @GetMapping("create")
-    public String renderCreateNoteForm(Model model) {
+    public String renderCreateNoteForm(HttpServletRequest request, Model model) {
         model.addAttribute("title", "New Note");
         model.addAttribute(new SecretNote());
+        HttpSession session = request.getSession();
+        User user = authenticationController.getUserFromSession(session);
+        model.addAttribute("userID", user.getId());
         return "notes/create";
     }
 
     /** Makes sure the new note is valid and does not create errors, then saves. Takes userId as a path parameter.
      * Once you have created a login, find the id on the user table and enter localhost:8080/notes/create?userId=number found on user table - CR */
+    /** BWG 2/7 - changed from using a URL parameter to getting user from session instead **/
     @PostMapping("create")
     public String processCreateNoteForm(@ModelAttribute @Valid SecretNote newSecretNote, Errors errors, Model model,
-                                        @RequestParam int userId) {
+                                        HttpServletRequest request) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "New Note");
+            model.addAttribute("errors", errors);
             return "notes/create";
         }
 
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isPresent()) {
-            newSecretNote.setUser(user.get());
-        }
         noteRepository.save(newSecretNote);
+        HttpSession session = request.getSession();
+        User user = authenticationController.getUserFromSession(session);
+        newSecretNote.setUser(user);
+
+        model.addAttribute("title", "All Notes");
+        model.addAttribute("notes", noteRepository.findById(user.getId()));
+        model.addAttribute("userID", user.getId());
         return "notes/index";
     }
 
