@@ -1,5 +1,6 @@
 package org.launchcode.secretnote.controllers;
 
+import org.launchcode.secretnote.data.NoteRepository;
 import org.launchcode.secretnote.data.UserRepository;
 import org.launchcode.secretnote.models.LoginFormDTO;
 import org.launchcode.secretnote.models.RegisterFormDTO;
@@ -25,6 +26,9 @@ public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    NoteRepository noteRepository;
 
     private static final String userSessionKey = "user";
 
@@ -121,7 +125,8 @@ public class AuthenticationController {
         }
 
         setUserInSession(request.getSession(), user);
-
+        model.addAttribute("title", "All Notes");
+        model.addAttribute("notes", noteRepository.findAll());
         return "notes/index";
     }
     @GetMapping("/logout")

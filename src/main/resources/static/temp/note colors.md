@@ -4,6 +4,7 @@ Blue 3 #7ebed2 (126,190,210)
 Yellow #ffdb91	(255,219,145)
 Orange #fec4ae	(254,196,174)
 Purple #c483a6	(196,131,166)
+Pink #e9bad3 (233,186,211)
 
 https://www.color-hex.com/color-palette/1006740
 #d0e0e3	(208,224,227)

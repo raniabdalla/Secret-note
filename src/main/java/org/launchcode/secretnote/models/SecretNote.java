@@ -2,12 +2,15 @@ package org.launchcode.secretnote.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class SecretNote extends AbstractEntity {
+
+    private String color;
 
     @ManyToOne
     @JoinColumn(name = "notes_id")
@@ -25,15 +28,15 @@ public class SecretNote extends AbstractEntity {
     private String content;
 
 
-    public SecretNote(String name, String content, User aUser) {
+    public SecretNote(String name, String content, User aUser, String color) {
         super();
         this.name = name;
         this.content = content;
         this.user = aUser;
+        this.color = color;
     }
 
     public SecretNote() {
-
     }
 
     public String getName() {
@@ -67,6 +70,10 @@ public class SecretNote extends AbstractEntity {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public String getColor() { return color; }
+
+    public void setColor(String color) { this.color = color; }
 
     @Override
     public String toString() {
