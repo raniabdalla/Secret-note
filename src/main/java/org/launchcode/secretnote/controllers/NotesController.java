@@ -42,6 +42,8 @@ public class NotesController {
         model.addAttribute("title", "All Notes");
         model.addAttribute("notes", noteRepository.findAll());
         model.addAttribute("userID", user.getId());
+        model.addAttribute("user", user);
+
         return "notes/index";
     }
 
@@ -49,20 +51,21 @@ public class NotesController {
     /** Displays the form/note for new note creation - CR
      * This is located at "localhost:8080/notes/create when you run the application - CR */
     /** BWG 2/7 - added code to pull userID from the session and add it to the model **/
-    @GetMapping("create")
+    @GetMapping("/create")
     public String renderCreateNoteForm(HttpServletRequest request, Model model) {
         model.addAttribute("title", "New Note");
         model.addAttribute(new SecretNote());
-        HttpSession session = request.getSession();
-        User user = authenticationController.getUserFromSession(session);
-        model.addAttribute("userID", user.getId());
-        return "notes/create";
+
+            HttpSession session = request.getSession();
+            User aUser = authenticationController.getUserFromSession(session);
+            model.addAttribute("userID", aUser.getId());
+            model.addAttribute("user", aUser);
+            return "notes/create";
     }
 
     /** Makes sure the new note is valid and does not create errors, then saves. Takes userId as a path parameter.
-     * Once you have created a login, find the id on the user table and enter localhost:8080/notes/create?userId=number found on user table - CR */
-    /** BWG 2/7 - changed from using a URL parameter to getting user from session instead **/
-    @PostMapping("create")
+     * Once you are logged in, click create note on the dashboard and your note will save with a user attached - CR */
+    @PostMapping("/create")
     public String processCreateNoteForm(@ModelAttribute @Valid SecretNote newSecretNote, Errors errors, Model model,
                                         HttpServletRequest request) {
         if(errors.hasErrors()) {
@@ -71,14 +74,15 @@ public class NotesController {
             return "notes/create";
         }
 
-        noteRepository.save(newSecretNote);
         HttpSession session = request.getSession();
         User user = authenticationController.getUserFromSession(session);
         newSecretNote.setUser(user);
+        noteRepository.save(newSecretNote);
 
         model.addAttribute("title", "All Notes");
         model.addAttribute("notes", noteRepository.findAll());
         model.addAttribute("userID", user.getId());
+        model.addAttribute("user", user);
         return "notes/index";
     }
 
@@ -112,7 +116,7 @@ public class NotesController {
 
         if (result.isEmpty()) {
             model.addAttribute("title", "Invalid Note ID: " + id);
-            return "redirect:../";
+            return "notes/index";
         } else {
             SecretNote secretNote = result.get();
             model.addAttribute("title", secretNote.getName() + " Details");

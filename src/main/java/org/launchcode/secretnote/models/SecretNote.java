@@ -1,7 +1,10 @@
 package org.launchcode.secretnote.models;
 
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.UUID;
@@ -9,8 +12,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class SecretNote extends AbstractEntity {
-
-    private String color;
 
     @ManyToOne
     @JoinColumn(name = "notes_id")
@@ -27,6 +28,8 @@ public class SecretNote extends AbstractEntity {
     @Size(min = 1, max = 500, message = "Note must be between 1 and 500 characters")
     private String content;
 
+    @NotNull
+    private String color;
 
     public SecretNote(String name, String content, User aUser, String color) {
         super();
