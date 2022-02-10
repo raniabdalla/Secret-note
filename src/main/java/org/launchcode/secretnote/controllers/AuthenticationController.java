@@ -84,13 +84,6 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
-        userRepository.save(newUser);
-        setUserInSession(request.getSession(), newUser);
-        model.addAttribute("notes", noteRepository.findAll());
-        model.addAttribute("user", newUser);
-        model.addAttribute("userID", newUser.getId());
-
         return "notes/index";
     }
 
@@ -132,7 +125,7 @@ public class AuthenticationController {
         model.addAttribute("notes", noteRepository.findAll());
         model.addAttribute("user", user);
         model.addAttribute("userID", user.getId());
-        return "notes/index";
+        return "redirect:/notes";
     }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){

@@ -11,11 +11,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Optional;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("notes")
@@ -34,13 +33,23 @@ public class NotesController {
     them to perform CRUD actions on their notes - Caleb Roman(CR) */
 
     /**Displays the notes on the Dashboard Page - CR */
-    /** BWG 2/7 - added code to pull userID from the session and add it to the model **/
     @GetMapping
     public String displayNotes(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         User user = authenticationController.getUserFromSession(session);
+
+        int userID = user.getId();
+        Iterable<SecretNote> notes = new ArrayList<>();
+        notes = noteRepository.findAll();
+        ArrayList<SecretNote> displayNotes = new ArrayList<>();
+        for (SecretNote note : notes) {
+            if (note.getUser().getId() == userID) {
+                displayNotes.add(note);
+            }
+        }
+
         model.addAttribute("title", "All Notes");
-        model.addAttribute("notes", noteRepository.findAll());
+        model.addAttribute("notes", displayNotes);
         model.addAttribute("userID", user.getId());
         model.addAttribute("user", user);
 
@@ -50,7 +59,6 @@ public class NotesController {
 
     /** Displays the form/note for new note creation - CR
      * This is located at "localhost:8080/notes/create when you run the application - CR */
-    /** BWG 2/7 - added code to pull userID from the session and add it to the model **/
     @GetMapping("/create")
     public String renderCreateNoteForm(HttpServletRequest request, Model model) {
         model.addAttribute("title", "New Note");
