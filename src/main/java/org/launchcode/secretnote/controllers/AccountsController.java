@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -18,6 +19,8 @@ public class AccountsController {
 
     @Autowired
     UserRepository userRepository;
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @GetMapping("")
     public String displayEditForm(Model model){
@@ -57,6 +60,37 @@ public class AccountsController {
 
         return "redirect:/login";
     }
+
+    @GetMapping("password")
+    public String displayEditPasswordForm(Model model){
+        model.addAttribute(new LoginFormDTO());
+        model.addAttribute("title", "Edit Password");
+        return "accounts/password";
+    }
+
+    @PostMapping("password")
+    public String processEditPasswordForm(@RequestParam(value="newPassword") String newPassword,
+                                          @ModelAttribute @Valid LoginFormDTO loginFormDTO,
+                                          Errors errors, HttpServletRequest request,
+                                          Model model) {
+
+        User existingUser = userRepository.findByUsername(loginFormDTO.getUsername());
+
+         if (!existingUser.isMatching(loginFormDTO.getPassword())){
+            errors.rejectValue("password", "password.invalid", "This password is not correct");
+            model.addAttribute("title", "Edit Password");
+            return "accounts/password";
+        }
+
+        if (existingUser.isMatching(loginFormDTO.getPassword())){
+
+            existingUser.sethPassword(encoder.encode(newPassword));
+            userRepository.save(existingUser);
+            return "redirect:/login";
+        }
+        return "accounts/password";
+    }
+
     @GetMapping("delete")
     public String displayDeleteAccountForm(Model model) {
         model.addAttribute("title", "Delete Accounts");

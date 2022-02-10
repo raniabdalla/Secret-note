@@ -22,6 +22,14 @@ public class User extends AbstractEntity{
     @NotNull
     private String hPassword;
 
+    public String gethPassword() {
+        return hPassword;
+    }
+
+    public void sethPassword(String hPassword) {
+        this.hPassword = hPassword;
+    }
+
     public User() {}
 
     public User(String username, String password) {
