@@ -12,9 +12,9 @@ import java.util.List;
 @Entity
 public class User extends AbstractEntity{
 
-    @OneToMany
-    @JoinColumn
-    private List<SecretNote> notes = new ArrayList<>();
+//    @OneToMany
+//    @JoinColumn
+//    private List<SecretNote> notes = new ArrayList<>();
 
     @NotNull
     private String username;
