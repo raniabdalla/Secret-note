@@ -77,7 +77,7 @@ public class NotesController {
         newSecretNote.setUser(user);
 
         model.addAttribute("title", "All Notes");
-        model.addAttribute("notes", noteRepository.findById(user.getId()));
+        model.addAttribute("notes", noteRepository.findAll());
         model.addAttribute("userID", user.getId());
         return "notes/index";
     }
