@@ -43,11 +43,6 @@ public class NotesController {
         model.addAttribute("notes", noteRepository.findAll());
         model.addAttribute("userID", user.getId());
         model.addAttribute("user", user);
-        System.out.print(user);
-        for (SecretNote notes : noteRepository.findAll()){
-            System.out.print(notes);
-            System.out.print(notes.getColor());
-        }
 
         return "notes/index";
     }
@@ -69,7 +64,7 @@ public class NotesController {
     }
 
     /** Makes sure the new note is valid and does not create errors, then saves. Takes userId as a path parameter.
-     * Once you have created a login, click on the create button and it works now :) - CR */
+     * Once you are logged in, click create note on the dashboard and your note will save with a user attached - CR */
     @PostMapping("/create")
     public String processCreateNoteForm(@ModelAttribute @Valid SecretNote newSecretNote, Errors errors, Model model,
                                         HttpServletRequest request) {
