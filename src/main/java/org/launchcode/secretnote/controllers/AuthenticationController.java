@@ -87,6 +87,9 @@ public class AuthenticationController {
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
+        model.addAttribute("notes", noteRepository.findAll());
+        model.addAttribute("user", newUser);
+        model.addAttribute("userID", newUser.getId());
 
         return "notes/index";
     }
@@ -127,6 +130,8 @@ public class AuthenticationController {
         setUserInSession(request.getSession(), user);
         model.addAttribute("title", "All Notes");
         model.addAttribute("notes", noteRepository.findAll());
+        model.addAttribute("user", user);
+        model.addAttribute("userID", user.getId());
         return "notes/index";
     }
     @GetMapping("/logout")
