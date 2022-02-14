@@ -4,7 +4,7 @@
 <body>
     <nav th:replace="fragments :: navbar"></nav>
     <div class="container body-content">
-        <div class="col m-2 p-2 note" th:each="note: ${notes}" th:style="'background-color:' + ${note.color} + ';'">
+        <div class="col m-2 p-2 note" th:each="note: ${notes}" th:style="'background-color:' + ${note.color} + '; color:' + ${note.textcolor} + ';'">
             <div class="noteName">
                 <span th:text="${note.name}">note name</span>
                 <a class="noteEditBtn" th:href="@{'/notes/details/' + ${note.id}}">Edit</a>
@@ -13,6 +13,5 @@
             <p th:text="${note.content}" class="noteContent">note content</p>
         </div>
     </div>
-    <h6 class="text-center" th:text="${userID}"></h6>
 </body>
 </html>

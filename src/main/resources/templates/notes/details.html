@@ -4,7 +4,7 @@
 <body>
     <nav th:replace="fragments :: navbar"></nav>
     <div class="container pt-5 body-content">
-        <form method="post">
+        <form method="post" th:action="@{/notes/save/}">
             <div class="row">
                 <p>Details for <span th:text="${secretNote.name}" style="font-weight:bold;">Secret Note - Note Name</span></p>
             </div>
@@ -16,7 +16,7 @@
             </div>
             <div class="form-group row">
                 <label for="notecontent" class="col-md-12">Note Content
-                    <textarea th:field="${secretNote.content}" class="form-control" rows="8" id="notecontent"></textarea>
+                    <textarea th:field="${secretNote.content}" class="form-control" rows="8" id="notecontent" maxlength="500"></textarea>
                 </label>
                 <p class="error" th:errors="${secretNote.content}"></p>
             </div>
@@ -27,11 +27,17 @@
                 <p class="error" th:errors="${secretNote.content}"></p>
             </div>
             <div class="form-group row">
-                <div class="col-md-3"></div>
-                <input type="submit" value="Edit Note" class="btn btn-info col-md-2">
+                <div class="col-md-1"></div>
+                <input type="hidden" th:value="${secretNote.id}" name="noteId">
+                <input type="submit" value="Save Note" class="btn btn-info col-md-2">
+        </form>
                 <div class="col-md-2"></div>
-                <input type="submit" value="Delete Note" class="btn btn-warning col-md-2">
-                <div class="col-md-3"></div>
+                <input type="button" value="Go Back" onclick="history.back()" class="btn btn-info col-md-2">
+                <div class="col-md-2"></div>
+        <form method="post" th:action="@{'/notes/delete/'}" class="col-md-2">
+                <input type="hidden" th:value="${secretNote.id}" name="noteId">
+                <input type="submit" value="Delete Note" class="btn btn-warning">
+                <div class="col-md-1"></div>
             </div>
         </form>
     </div>
