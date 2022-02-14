@@ -3,7 +3,7 @@
 <head th:insert="fragments :: head">
 <body>
     <nav th:replace="fragments :: navbar"></nav>
-    <div class="container body-content">
+    <div class="container body-content" th:if="${notes.size()} &gt; 0">
         <div class="col m-2 p-2 note" th:each="note: ${notes}" th:style="'background-color:' + ${note.color} + '; color:' + ${note.textcolor} + ';'">
             <div class="noteName">
                 <span th:text="${note.name}">note name</span>
@@ -12,6 +12,9 @@
             <hr>
             <p th:text="${note.content}" class="noteContent">note content</p>
         </div>
+    </div>
+    <div class="container body-content" th:unless="${notes.size()} &gt; 0">
+        <h4 class="text-center mt-4">No notes yet! Click <a th:href="@{/notes/create}">here</a> to create one!</h4>
     </div>
 </body>
 </html>
