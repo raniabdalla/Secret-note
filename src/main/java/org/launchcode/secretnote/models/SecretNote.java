@@ -1,14 +1,9 @@
 package org.launchcode.secretnote.models;
 
-import net.bytebuddy.implementation.bind.annotation.Default;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class SecretNote extends AbstractEntity {
@@ -31,12 +26,16 @@ public class SecretNote extends AbstractEntity {
     @NotNull
     private String color;
 
+    @NotNull
+    private String textcolor;
+
     public SecretNote(String name, String content, User aUser, String color) {
         super();
         this.name = name;
         this.content = content;
         this.user = aUser;
         this.color = color;
+        this.setTextcolor();
     }
 
     public SecretNote() {
@@ -76,7 +75,20 @@ public class SecretNote extends AbstractEntity {
 
     public String getColor() { return color; }
 
-    public void setColor(String color) { this.color = color; }
+    public void setColor(String color) {
+        this.color = color;
+        this.setTextcolor();
+    }
+
+    public String getTextcolor() { return textcolor; }
+
+    public void setTextcolor() {
+        int colorR = Integer.decode("0x" + this.color.substring(1,3));
+        int colorG = Integer.decode("0x" + this.color.substring(3,5));
+        int colorB = Integer.decode("0x" + this.color.substring(5,7));
+        int average = (colorR + colorG + colorB) / 3;
+        if (average > 128) { this.textcolor = "#000000"; } else { this.textcolor = "#FFFFFF"; }
+    }
 
     @Override
     public String toString() {
