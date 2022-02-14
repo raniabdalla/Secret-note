@@ -84,7 +84,14 @@ public class AuthenticationController {
             return "register";
         }
 
-        return "notes/index";
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        userRepository.save(newUser);
+        setUserInSession(request.getSession(), newUser);
+        model.addAttribute("notes", noteRepository.findAll());
+        model.addAttribute("user", newUser);
+        model.addAttribute("userID", newUser.getId());
+
+        return "redirect:/notes";
     }
 
     @GetMapping("/login")
