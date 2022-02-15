@@ -91,29 +91,11 @@ public class NotesController {
         return "redirect:/notes";
     }
 
-    /** Displays the form page for Deleting a note, this can be tweaked later to be more user friendly - CR */
-//    @GetMapping("delete")
-//    public String displayDeleteNoteForm(Model model) {
-//        model.addAttribute("title", "Delete Note");
-//        model.addAttribute("notes", noteRepository.findAll());
-//        return "notes/delete";
-//    }
-
     /** Processes deletion of notes, if ID is NOT NULL, deletes the note and returns user to dashboard - CR */
-    /** BWG 2/9 - sorted out the POST parameter, and made this redirect to the dashboard when complete */
     @PostMapping("delete")
-    public String processDeleteNoteForm(@ModelAttribute @Valid SecretNote newSecretNote, Errors errors, Model model,
-                                        HttpServletRequest request) {
-        if(errors.hasErrors()) {
-            model.addAttribute("title", "New Note");
-            model.addAttribute("errors", errors);
-            return "notes/create";
-        }
+    public String processDeleteNoteForm(@RequestParam @Valid Integer noteId) {
 
-        HttpSession session = request.getSession();
-        User user = authenticationController.getUserFromSession(session);
-        newSecretNote.setUser(user);
-        noteRepository.save(newSecretNote);
+        noteRepository.deleteById(noteId);
 
         return "redirect:/notes";
     }
@@ -157,6 +139,4 @@ public class NotesController {
         }
         return "notes/details";
     }
-
-
 }
