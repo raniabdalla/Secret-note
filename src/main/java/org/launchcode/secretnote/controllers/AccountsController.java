@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+/**
+ * Created by Rania Abdalla
+ */
 @Controller
 @RequestMapping("accounts")
 public class AccountsController {
